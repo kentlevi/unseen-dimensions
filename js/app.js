@@ -336,8 +336,8 @@ try {
 
     const hero = document.getElementById('hero-content');
     if (hero) {
-      const opacity = Math.max(0, 1 - scrollProgress * 2.2);
-      const translateY = Math.min(50, scrollProgress * 120);
+      const opacity = Math.max(0, 1 - scrollProgress * 3.5);
+      const translateY = Math.min(60, scrollProgress * 180);
       hero.style.opacity = opacity.toFixed(3);
       hero.style.transform = `translateY(${translateY}px)`;
     }
@@ -377,9 +377,9 @@ try {
     const isMobile = window.innerWidth < 768;
     const responsiveScale = isMobile ? 0.65 : 1.0;
 
-    // Refined Thresholds: p1 (Hero -> Projects), p2 (Projects -> Final)
-    const p1 = Math.max(0, Math.min(1, (scrollProgress - 0.02) * 4.5));
-    const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.55) * 6.0));
+    // Refined Thresholds: Triggering even earlier to close the gap
+    const p1 = Math.max(0, Math.min(1, (scrollProgress - 0.005) * 5.5));
+    const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.52) * 6.5));
     
     // Core Positioning
     const targetX = THREE.MathUtils.lerp(1.35, 0.0, p1);
@@ -420,8 +420,8 @@ try {
     // Interstitial Title Animation (Fades between Section 1 and 2)
     const titleEl = document.getElementById('interstitial-title');
     if (titleEl) {
-      const peak = 0.18; // Slightly later peak to clear the initial Hero fade
-      const range = 0.22; // Wider range for visibility
+      const peak = 0.12; // Moved earlier to match tightened layout
+      const range = 0.18; 
       const dist = Math.abs(scrollProgress - peak);
       const intensity = Math.max(0, 1 - (dist / range));
       const eased = Math.pow(intensity, 2.0); // Softer curve
