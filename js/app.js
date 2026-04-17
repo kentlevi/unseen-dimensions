@@ -33,6 +33,13 @@ try {
     antialias: true
   });
 
+  // Lenis Smooth Scroll Initialization
+  const lenis = new Lenis({
+    lerp: 0.1,
+    wheelMultiplier: 1.1,
+    smoothWheel: true
+  });
+
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.25 : 1.8));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -64,6 +71,28 @@ try {
 
   const crystalGroup = new THREE.Group();
   scene.add(crystalGroup);
+
+  // v2: Parallax Starfield Layer
+  const starCount = 800;
+  const starGeo = new THREE.BufferGeometry();
+  const starPositions = new Float32Array(starCount * 3);
+  for(let i=0; i<starCount; i++) {
+    const i3 = i * 3;
+    starPositions[i3] = (Math.random() - 0.5) * 25;
+    starPositions[i3+1] = (Math.random() - 0.5) * 20;
+    starPositions[i3+2] = (Math.random() - 1.0) * 8; 
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+  const starMat = new THREE.PointsMaterial({
+    color: 0x63dfff,
+    size: 0.035,
+    transparent: true,
+    opacity: 0.4,
+    sizeAttenuation: true,
+    blending: THREE.AdditiveBlending
+  });
+  const starfield = new THREE.Points(starGeo, starMat);
+  scene.add(starfield);
 
   const outerGeo = new THREE.IcosahedronGeometry(1.05, 0); // Sharp facets
   const innerGeo = new THREE.IcosahedronGeometry(1.0, 1);
@@ -301,15 +330,17 @@ try {
     targetRot.y = mouse.x * 0.35;
   });
 
-  window.addEventListener('scroll', () => {
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    scrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+  // Lenis-Powered Scroll Logic
+  lenis.on('scroll', ({ progress }) => {
+    scrollProgress = progress;
 
     const hero = document.getElementById('hero-content');
-    const opacity = Math.max(0, 1 - scrollProgress * 2.2);
-    const translateY = Math.min(50, scrollProgress * 120);
-    hero.style.opacity = opacity.toFixed(3);
-    hero.style.transform = `translateY(${translateY}px)`;
+    if (hero) {
+      const opacity = Math.max(0, 1 - scrollProgress * 2.2);
+      const translateY = Math.min(50, scrollProgress * 120);
+      hero.style.opacity = opacity.toFixed(3);
+      hero.style.transform = `translateY(${translateY}px)`;
+    }
 
     document.querySelectorAll('.project-card').forEach((card, i) => {
       const rect = card.getBoundingClientRect();
@@ -337,11 +368,18 @@ try {
     const t = clock.getElapsedTime();
     const intro = Math.min(t / 1.2, 1);
 
+    // Sync Lenis per frame
+    lenis.raf(t * 1000);
+
     animateHeroCrystal(t);
+
+    // Responsive Scaling Logic
+    const isMobile = window.innerWidth < 768;
+    const responsiveScale = isMobile ? 0.65 : 1.0;
 
     // Refined Thresholds: p1 (Hero -> Projects), p2 (Projects -> Final)
     const p1 = Math.max(0, Math.min(1, (scrollProgress - 0.02) * 4.5));
-    const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.55) * 6.0)); // even more sensitive
+    const p2 = Math.max(0, Math.min(1, (scrollProgress - 0.55) * 6.0));
     
     // Core Positioning
     const targetX = THREE.MathUtils.lerp(1.35, 0.0, p1);
@@ -349,17 +387,26 @@ try {
     
     // Phase-Specific Y Logic: Robust Sinking
     const targetY = THREE.MathUtils.lerp(0.14, 0.0, p1);
-    // Use Math.min to clamp but ensure it reaches -1.8
     const sinkAmount = THREE.MathUtils.lerp(0, 1.8, p2);
     const finalY = targetY - sinkAmount; 
     
-    const finalScale = THREE.MathUtils.lerp(1.0, 1.55, p2);
+    const finalScale = THREE.MathUtils.lerp(1.0, 1.55, p2) * responsiveScale;
     const finalZ = THREE.MathUtils.lerp(targetZ, -0.2, p2);
     
     crystalGroup.position.x = targetX + mouse.x * 0.2;
     crystalGroup.position.y = finalY + Math.sin(t * 0.9) * 0.12 + mouse.y * 0.16;
     crystalGroup.position.z = finalZ;
     crystalGroup.scale.setScalar(finalScale);
+
+    // Animate Starfield Parallax
+    const starPos = starfield.geometry.attributes.position.array;
+    for(let i=0; i<starCount; i++) {
+        const i3 = i * 3;
+        starPos[i3+1] -= scrollProgress * 0.02; // Scroll-linked drift
+        if(starPos[i3+1] < -12) starPos[i3+1] = 12;
+    }
+    starfield.geometry.attributes.position.needsUpdate = true;
+    starfield.rotation.y = t * 0.04;
 
     // Visibility Control: Consistent presence
     crystalGroup.visible = true;
@@ -590,11 +637,21 @@ try {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('active');
       follower.classList.add('active');
+      // Depth of Field Focus Effect
+      document.body.classList.add('is-focused');
+      canvas.style.filter = 'blur(6px) saturate(0.8)';
+      document.getElementById('bg-projects-image').style.filter = 'blur(8px) brightness(0.7)';
+      document.getElementById('interstitial-title').style.filter = 'blur(10px) opacity(0.2)';
     });
 
     el.addEventListener('mouseleave', () => {
       cursor.classList.remove('active');
       follower.classList.remove('active');
+      // Remove Focus Effect
+      document.body.classList.remove('is-focused');
+      canvas.style.filter = '';
+      document.getElementById('bg-projects-image').style.filter = '';
+      document.getElementById('interstitial-title').style.filter = '';
     });
   });
 
