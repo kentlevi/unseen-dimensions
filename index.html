@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cinematic Portfolio</title>
 
-<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/styles.css?v=projects-video-1" />
 <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script> 
 <script type="importmap">
 {
@@ -24,22 +24,32 @@
 <div class="bg-vortex"></div>
 <div class="bg-noise"></div>
 <div id="bg-projects-image"></div>
+<video id="bg-projects-video" muted playsinline preload="metadata" aria-hidden="true">
+  <source src="assets/videos/video-bg.mp4" type="video/mp4" />
+</video>
 <div id="interstitial-title" class="section-interstitial">SELECTED WORKS</div>
+<div class="model-stage-indicator" id="model-stage-indicator" aria-hidden="true">
+  <span>Origin</span>
+  <strong>Creative Core</strong>
+</div>
 
 <div class="scroll-container">
   <header class="top-nav">
     <a href="#projects" class="nav-link is-active">Work</a>
     <a href="#about" class="nav-link">About</a>
+    <a href="#capabilities" class="nav-link">Capabilities</a>
+    <a href="#process" class="nav-link">Process</a>
     <a href="#contact" class="nav-link">Contact</a>
+    <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false">Motion</button>
   </header>
 
   <section class="hero-overlay">
     <div class="content-shell">
       <div class="hero-content" id="hero-content">
         <div class="eyebrow">Creative Frontend / Cinematic Interfaces</div>
-        <h1 class="hero-title">Unseen <span class="accent">Dimensions</span></h1>
+        <h1 class="hero-title">Cinematic <span class="accent">Web Interfaces</span></h1>
         <p class="hero-description">
-          Immersive cinematic portfolio built around motion, atmosphere, 3D form, and premium interface storytelling.
+          Frontend portfolio for immersive landing pages, motion-led product stories, and 3D interface systems that feel premium without losing usability.
         </p>
         <div class="hero-actions">
           <a class="hero-button primary magnetic" href="#projects">Explore Work</a>
@@ -63,49 +73,81 @@
   <main>
     <section class="content-section" id="projects" aria-labelledby="projects-heading">
       <div class="content-shell">
+        <div class="section-header reveal-item">
+          <span class="section-kicker">Selected Work</span>
+          <h2 class="section-heading" id="projects-heading">Interfaces with atmosphere, depth, and intent.</h2>
+          <p class="section-copy">
+            A focused set of cinematic web concepts built for rich presentation, smooth interaction, and memorable digital identity.
+          </p>
+        </div>
+
         <div class="projects-grid">
-            <a class="project-card magnetic vortex-pos-1" href="#" style="--card-glow: #63dfff;">
+            <a class="project-card magnetic vortex-pos-1" href="#case-study" data-case="quantum" style="--card-glow: #63dfff;">
               <div class="project-card-content">
                 <h3 class="project-title uppercase-neon">Quantum Echo</h3>
                 <p class="project-description">
-                  Immersive concept exploring bioluminescent atmosphere and motion-driven storytelling.
+                  Experimental launch page exploring bioluminescent atmosphere, scroll pacing, and cinematic product reveal moments.
                 </p>
+                <div class="project-meta">
+                  <span>Frontend / Motion</span>
+                  <span>Three.js + CSS</span>
+                  <span>2026</span>
+                </div>
+                <span class="project-link">View case direction</span>
               </div>
               <div class="project-thumbnail">
                 <img src="assets/images/thumbnails/neon-pulse.png" alt="Quantum Echo Preview" />
               </div>
             </a>
 
-            <a class="project-card magnetic vortex-pos-2" href="#" style="--card-glow: #b58cff;">
+            <a class="project-card magnetic vortex-pos-2" href="#case-study" data-case="fractal" style="--card-glow: #b58cff;">
               <div class="project-card-content">
                 <h3 class="project-title uppercase-neon">Fractal Soul</h3>
                 <p class="project-description">
-                  Content-driven experience balancing crystalline structure and digital composition.
+                  Editorial web concept balancing crystalline layouts, atmospheric imagery, and clear narrative structure.
                 </p>
+                <div class="project-meta">
+                  <span>UI Direction</span>
+                  <span>Responsive Layout</span>
+                  <span>2026</span>
+                </div>
+                <span class="project-link">View case direction</span>
               </div>
               <div class="project-thumbnail">
                 <img src="assets/images/thumbnails/fractal-soul.png" alt="Fractal Soul Preview" />
               </div>
             </a>
 
-            <a class="project-card magnetic vortex-pos-3" href="#" style="--card-glow: #ff7ab0;">
+            <a class="project-card magnetic vortex-pos-3" href="#case-study" data-case="synapse" style="--card-glow: #ff7ab0;">
               <div class="project-card-content">
                 <h3 class="project-title uppercase-neon">Synapse Flow</h3>
                 <p class="project-description">
-                  A modern interface designed for structure, neural mapping, and generative systems.
+                  Systems interface prototype designed around structured content, neural mapping, and generative visual language.
                 </p>
+                <div class="project-meta">
+                  <span>Product UI</span>
+                  <span>Interaction System</span>
+                  <span>2026</span>
+                </div>
+                <span class="project-link">View case direction</span>
               </div>
               <div class="project-thumbnail">
                 <img src="assets/images/thumbnails/synapse-flow.png" alt="Synapse Flow Preview" />
               </div>
             </a>
 
-            <a class="project-card magnetic vortex-pos-4" href="#" style="--card-glow: #65c7ff;">
+            <a class="project-card magnetic vortex-pos-4" href="#case-study" data-case="void" style="--card-glow: #65c7ff;">
               <div class="project-card-content">
                 <h3 class="project-title uppercase-neon">Void Dream</h3>
                 <p class="project-description">
-                  A spatial UI concept shaped by gravity lensing, visual clarity, and page flow.
+                  Spatial portfolio concept shaped by gravity-lens motion, readable case-study flow, and a cinematic hero artifact.
                 </p>
+                <div class="project-meta">
+                  <span>3D Web</span>
+                  <span>Scroll Story</span>
+                  <span>2026</span>
+                </div>
+                <span class="project-link">View case direction</span>
               </div>
               <div class="project-thumbnail">
                 <img src="assets/images/thumbnails/void-dream.png" alt="Void Dream Preview" />
@@ -117,7 +159,140 @@
 
     <section class="content-section" id="featured" aria-labelledby="featured-heading">
       <div class="content-shell">
-        <div class="featured-empty-stage"></div>
+        <div class="featured-case reveal-item">
+          <div class="featured-copy">
+            <span class="section-kicker">Featured Case Study</span>
+            <h2 class="section-heading" id="featured-heading">A spatial launch experience shaped around flow.</h2>
+            <p class="section-copy">
+              Void Dream explores how a portfolio can behave more like a guided environment than a static page, using scroll-linked motion, visual depth, and focused content pacing.
+            </p>
+            <div class="case-metrics">
+              <span><strong>3D</strong> Hero System</span>
+              <span><strong>60fps</strong> Motion Target</span>
+              <span><strong>Responsive</strong> Interaction</span>
+            </div>
+            <div class="case-breakdown">
+              <article>
+                <h3>Challenge</h3>
+                <p>Create a portfolio experience with a strong cinematic identity while keeping the work readable and easy to navigate.</p>
+              </article>
+              <article>
+                <h3>Approach</h3>
+                <p>Use one evolving 3D artifact as a visual guide, then let each section change its position, glow, and motion meaningfully.</p>
+              </article>
+              <article>
+                <h3>Outcome</h3>
+                <p>A scroll-led interface that frames selected work, process, and contact as one continuous narrative.</p>
+              </article>
+            </div>
+          </div>
+          <div class="case-visual" aria-hidden="true">
+            <div class="case-orbit one"></div>
+            <div class="case-orbit two"></div>
+            <div class="case-core"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section portfolio-section" id="about" aria-labelledby="about-heading">
+      <div class="content-shell">
+        <div class="about-layout">
+          <div class="section-header reveal-item">
+            <span class="section-kicker">About</span>
+            <h2 class="section-heading" id="about-heading">Frontend craft for cinematic digital presence.</h2>
+          </div>
+          <div class="about-copy reveal-item">
+            <p>
+              I design and build immersive interface systems that combine motion, visual direction, and clean frontend execution. The work focuses on portfolio sites, product stories, launch pages, and branded web experiences that need to feel distinct without losing clarity.
+            </p>
+            <p>
+              The approach is deliberate: strong composition first, interaction second, then performance refinement until the experience feels responsive on real screens.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section portfolio-section" id="capabilities" aria-labelledby="capabilities-heading">
+      <div class="content-shell">
+        <div class="section-header reveal-item">
+          <span class="section-kicker">Capabilities</span>
+          <h2 class="section-heading" id="capabilities-heading">Design systems, motion, and production frontend.</h2>
+        </div>
+        <div class="capability-grid">
+          <article class="capability-card reveal-item">
+            <span class="capability-index">01</span>
+            <h3>Art-Directed UI</h3>
+            <p>High-impact layouts, type hierarchy, color systems, and interface composition for memorable brand moments.</p>
+          </article>
+          <article class="capability-card reveal-item">
+            <span class="capability-index">02</span>
+            <h3>Interactive Motion</h3>
+            <p>Scroll choreography, magnetic interactions, canvas effects, and micro-motion tuned for atmosphere and responsiveness.</p>
+          </article>
+          <article class="capability-card reveal-item">
+            <span class="capability-index">03</span>
+            <h3>3D Web Scenes</h3>
+            <p>Three.js environments, shaders, particles, lighting, and animated objects built around the page narrative.</p>
+          </article>
+          <article class="capability-card reveal-item">
+            <span class="capability-index">04</span>
+            <h3>Frontend Delivery</h3>
+            <p>Semantic HTML, responsive CSS, performance tuning, accessibility basics, and deploy-ready static experiences.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section portfolio-section" id="process" aria-labelledby="process-heading">
+      <div class="content-shell">
+        <div class="process-layout">
+          <div class="section-header reveal-item">
+            <span class="section-kicker">Process</span>
+            <h2 class="section-heading" id="process-heading">From visual direction to polished interaction.</h2>
+          </div>
+          <div class="process-steps">
+            <article class="process-step reveal-item">
+              <span>01</span>
+              <h3>Direction</h3>
+              <p>Define tone, visual references, content priority, and the core interaction idea.</p>
+            </article>
+            <article class="process-step reveal-item">
+              <span>02</span>
+              <h3>Prototype</h3>
+              <p>Build the first working scene and layout so motion, spacing, and responsiveness can be judged early.</p>
+            </article>
+            <article class="process-step reveal-item">
+              <span>03</span>
+              <h3>Refine</h3>
+              <p>Balance visuals with performance, tune interaction feel, and remove friction across viewport sizes.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section portfolio-section contact-section" id="contact" aria-labelledby="contact-heading">
+      <div class="content-shell">
+        <div class="contact-layout reveal-item">
+          <div>
+            <span class="section-kicker">Contact</span>
+            <h2 class="section-heading" id="contact-heading">Let's build a web experience with presence.</h2>
+            <p class="section-copy">
+              Available for portfolio upgrades, product launches, creative frontend builds, and cinematic interface direction.
+            </p>
+            <div class="contact-links">
+              <a href="mailto:hello@glophics.dev">hello@glophics.dev</a>
+              <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+          <div class="contact-actions">
+            <a class="hero-button primary magnetic" href="mailto:hello@glophics.dev">Start a Project</a>
+            <a class="hero-button secondary magnetic" href="#projects">Review Work</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -126,7 +301,31 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-follower" id="cursor-follower"></div>
 
+<div class="case-modal" id="case-study" aria-hidden="true">
+  <div class="case-modal-backdrop" data-case-close></div>
+  <section class="case-modal-panel" role="dialog" aria-modal="true" aria-labelledby="case-modal-title">
+    <button class="case-modal-close" type="button" data-case-close aria-label="Close case study">Close</button>
+    <span class="section-kicker" id="case-modal-kicker">Case Direction</span>
+    <h2 class="section-heading" id="case-modal-title">Project Title</h2>
+    <p class="section-copy" id="case-modal-summary"></p>
+    <div class="case-modal-grid">
+      <article>
+        <h3>Role</h3>
+        <p id="case-modal-role"></p>
+      </article>
+      <article>
+        <h3>Stack</h3>
+        <p id="case-modal-stack"></p>
+      </article>
+      <article>
+        <h3>Focus</h3>
+        <p id="case-modal-focus"></p>
+      </article>
+    </div>
+    <div class="case-modal-notes" id="case-modal-notes"></div>
+  </section>
+</div>
 
-<script type="module" src="js/app.js"></script>
+<script type="module" src="js/app.js?v=projects-video-1"></script>
 </body>
 </html>
